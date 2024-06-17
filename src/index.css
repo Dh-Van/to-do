@@ -28,3 +28,10 @@ hr {
 	padding: 15px 15px;
 	flex-grow: 1;
 }
+
+.task {
+	min-width: "100px";
+	min-height: "20px";
+	display: "inline-block";
+	border: "1px solid #ccc";
+}
