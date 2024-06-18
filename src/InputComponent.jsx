@@ -1,13 +1,8 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
-function InputComponent({
-	inputValue,
-	setInputValue,
-	isEditing,
-	setIsEditing,
-	setItems,
-}) {
+function InputComponent({ inputValue, setInputValue, setItems }) {
 	const inputRef = useRef(null);
+	const [isEditing, setIsEditing] = useState(false);
 
 	const handleButtonClick = () => {
 		setIsEditing(true);
@@ -42,13 +37,20 @@ function InputComponent({
 	}, [isEditing]);
 
 	return (
-		<input
-			ref={inputRef}
-			value={inputValue}
-			onChange={handleInputChange}
-			onBlur={handleInputBlur}
-			onKeyPress={handleInputKeyPress}
-		/>
+		<>
+			{isEditing ? (
+				<input
+					ref={inputRef}
+					type="text"
+					value={inputValue}
+					onChange={handleInputChange}
+					onBlur={handleInputBlur}
+					onKeyPress={handleInputKeyPress}
+				/>
+			) : (
+				<button onClick={handleButtonClick}>Add Task</button>
+			)}
+		</>
 	);
 }
 

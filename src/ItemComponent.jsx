@@ -3,6 +3,7 @@ import React, { useState } from "react";
 function ItemComponent({ item, style, updateItem }) {
 	const [isEditing, setIsEditing] = useState(false);
 	const [editValue, setEditValue] = useState(item);
+	const [isChecked, setIsChecked] = useState(false);
 
 	const handleEdit = () => {
 		setIsEditing(true);
@@ -20,18 +21,31 @@ function ItemComponent({ item, style, updateItem }) {
 		}
 	};
 
+	const handleCheckChange = () => {
+		setIsChecked(!isChecked);
+	};
+
 	return (
-		<div style={style}>
+		<div className="item-container" style={{ ...style }}>
+			<input
+				type="checkbox"
+				checked={isChecked}
+				onChange={handleCheckChange}
+				className="item-checkbox"
+			/>
 			{isEditing ? (
-				<form onSubmit={handleEditSubmit}>
+				<form onSubmit={handleEditSubmit} className="item-form">
 					<input
 						type="text"
 						value={editValue}
 						onChange={handleEditChange}
+						className="item-input"
 					/>
 				</form>
 			) : (
-				<div onDoubleClick={handleEdit}>{item}</div>
+				<div onDoubleClick={handleEdit} className="item-text">
+					{item}
+				</div>
 			)}
 		</div>
 	);
